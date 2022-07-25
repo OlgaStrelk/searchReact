@@ -16,17 +16,10 @@
 }
 
 .App-cards {
+  margin-top: 60px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 48px;
 }
 
-
-.modal {
-  display: none;
-}
-
-.modal_open {
-  display: block;
-}

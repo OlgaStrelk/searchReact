@@ -7,10 +7,16 @@ import Input from "./Input";
 import Form from "./Form";
 import Button from "./Button";
 import Card from "./Card";
+import Popup from "./Popup";
 
 function App() {
-  let [inputValue, setInputValue] = useState("");
-  let [cardsData, setCardsData] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [cardsData, setCardsData] = useState([]);
+  const [selectedCard, handleCardClick] = useState(null);
+
+  const closePopup = () => {
+    handleCardClick(null);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,9 +44,10 @@ function App() {
         </Form>
         <section className="App-cards">
           {cardsData.map((card) => (
-            <Card {...card} key={card.id} />
+            <Card {...card} key={card.id} onCardClick={handleCardClick} />
           ))}
         </section>
+        <Popup selectedCard={selectedCard} onClose={closePopup} />
       </div>
     </div>
   );
