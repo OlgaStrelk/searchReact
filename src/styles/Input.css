@@ -1,10 +1,10 @@
 .Input {
+    box-sizing: border-box;
     padding-left: 10px;
     color: #000;
-    box-sizing: border-box;
     width: 100%;
-    max-width: 690px;
-    height: 60px;
+    max-width: 684px;
+    height: 54px;
     font-size: 14px;
     border: 1px solid #c4c4c4;
     border-radius: 3px;
