@@ -1,9 +1,9 @@
 .Popup {
-  /* position: fixed;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
-  right: 0; */
+  right: 0;
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
@@ -16,10 +16,17 @@
 
 .Popup-open {
   visibility: visible;
-  
+
   opacity: 1;
 }
 
 .Popup-container {
-
+  background-color: white;
+  color: black;
+  width: 430px;
+  border-radius: 10px;
+  padding: 0;
+  box-sizing: border-box;
+  position: absolute;
+  min-height: fit-content;
 }
