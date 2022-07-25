@@ -16,7 +16,6 @@
 
 .Popup-open {
   visibility: visible;
-
   opacity: 1;
 }
 
@@ -26,7 +25,44 @@
   width: 430px;
   border-radius: 10px;
   padding: 0;
+  padding-right: 10px;
   box-sizing: border-box;
   position: absolute;
   min-height: fit-content;
+  display: grid;
+  grid-template-columns: 120px 270px;
+  grid-template-rows: 4;
+  grid-gap: 6px 30px;
 }
+
+.Popup-close {
+  padding: 0;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 32px;
+  height: 32px;
+  background: center / contain no-repeat url("../images/Close_icon.svg");
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  opacity: 1;
+  transition: opacity 1s linear;
+  cursor: pointer;
+}
+
+.Popup-close:hover {
+  opacity: 0.6;
+}
+
+.Popup-image {
+  height: 50vh;
+  object-fit: contain;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 6;
+  align-self: center;
+  justify-self: center
+}
+
+

@@ -10,18 +10,22 @@ function Popup(props) {
       <div className="Popup-container">
         <button
           type="button"
-          className="popup__close popup__close_type_big-image"
+          className="Popup-close"
           aria-label="Закрыть"
           onClick={onClose}
         ></button>
 
         <img
-          className="popup__image"
+          className="Popup-image"
           src={popupData?.link}
           alt={popupData?.title}
         />
 
-        <p className="popup__caption">{popupData?.title}</p>
+        <h3 className="Popup-title">{popupData?.title}</h3>
+        <p className="Popup-subtitle">{popupData?.subtitle}</p>
+        <span className="Popup-tagline">{popupData?.tagline}</span>
+        <p className="Popup-text">{popupData?.abv}</p>
+        <p className="Popup-text">{popupData?.food}</p>
       </div>
     </div>
   );
