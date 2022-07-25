@@ -1,1 +1,2 @@
-# searchReact
+# searcherReact
+## SPA
