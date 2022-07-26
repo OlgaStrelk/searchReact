@@ -10,6 +10,7 @@ import Card from "./Card";
 import Popup from "./Popup";
 import Pagination from "./Pagination";
 import Loading from "./Loading";
+import NotFound from "./NotFound";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -21,10 +22,19 @@ function App() {
   const [openPopup, setOpenPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isButtonActive, setIsButtonActive] = useState(false);
+  const [isNotFound, setIsNotFound] = useState(false);
 
   let pageSize = 9;
 
-//открыть попап, если карточка кликнута
+  //отрисовать кнопку поиска
+  const renderButton = () => {
+    if (inputValue === "") {
+      setIsButtonActive(false);
+    }
+    setIsButtonActive(true);
+  };
+
+  //открыть попап, если карточка кликнута
   useEffect(() => {
     if (isCardClicked === true) {
       setIsLoading(true);
@@ -45,26 +55,14 @@ function App() {
     }
   }, [isCardClicked]);
 
-  //отрисовать кнопку поиска
-  const renderButton = () => {
-    if (inputValue === '') {
-      setIsButtonActive(false)
-    }
-    setIsButtonActive(true)
-  }
-
-//закрыть попап
+  //закрыть попап
   const closePopup = () => {
     setOpenPopup(false);
     setCardClicked(false);
     setPopupData(null);
   };
 
-  const showNotFound = () => {
-    console.log("Увы, мы ничего не нашли. Попробуйте другое название");
-  };
-
-//отправить запрос за карточками
+  //отправить запрос за карточками
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -72,8 +70,10 @@ function App() {
       .getCards(inputValue)
       .then((res) => {
         if (res.length === 0) {
-          showNotFound();
+          setIsNotFound(true);
+          setCardsData([]);
         } else {
+          setIsNotFound(false);
           const formattedData = res.map((cardData) => {
             return {
               link: cardData.image_url,
@@ -88,7 +88,7 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
-  //карточки для отображения на одной странице 
+  //карточки для отображения на одной странице
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
@@ -98,6 +98,7 @@ function App() {
   //управляемый импут
   const handleInput = (e) => {
     setInputValue(e.target.value);
+    renderButton();
   };
 
   return (
@@ -105,10 +106,15 @@ function App() {
       <div className="App-content">
         <Form className="App-search" handleSubmit={handleSubmit}>
           <Input handleChange={handleInput} value={inputValue} />
-          <Button text={"Искать"} inputValue={inputValue} isButtonActive={isButtonActive}/>
+          <Button
+            text={"Искать"}
+            inputValue={inputValue}
+            isButtonActive={isButtonActive}
+          />
         </Form>
         {isLoading && <Loading>Loading...</Loading>}
         <section className="App-cards">
+          {isNotFound && <NotFound />}
           {currentTableData.map((card) => (
             <Card
               {...card}

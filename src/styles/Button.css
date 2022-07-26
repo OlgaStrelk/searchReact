@@ -16,5 +16,9 @@
 
 .Button.disabled {
   background-color: grey;
-  cursor: auto;
+}
+
+.Button.disabled:hover {
+  opacity: 1;
+  cursor: default;
 }
