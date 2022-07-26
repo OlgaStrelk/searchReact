@@ -18,18 +18,20 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isCardClicked, setCardClicked] = useState(false);
   let pageSize = 9;
-  
+
   useEffect(() => {
-    api.getCardById(selectedCardId).then((res) => {
-      setPopupData({
-        link: res[0].image_url,
-        title: res[0].name,
-        subtitle: res[0].description,
-        tagline: res[0].tagline,
-        abv: res[0].abv,
-        food: res[0].food_pairing,
+    if (isCardClicked === true) {
+      api.getCardById(selectedCardId).then((res) => {
+        setPopupData({
+          link: res[0].image_url,
+          title: res[0].name,
+          subtitle: res[0].description,
+          tagline: res[0].tagline,
+          abv: res[0].abv,
+          food: res[0].food_pairing,
+        });
       });
-    });
+    }
   }, [isCardClicked]);
 
   const closePopup = () => {
@@ -85,7 +87,11 @@ function App() {
           pageSize={pageSize}
           onPageChange={(page) => setCurrentPage(page)}
         />
-        <Popup isCardClicked={isCardClicked} popupData={popupData} onClose={closePopup} />
+        <Popup
+          isCardClicked={isCardClicked}
+          popupData={popupData}
+          onClose={closePopup}
+        />
       </div>
     </div>
   );
