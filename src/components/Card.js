@@ -3,15 +3,15 @@ import React from "react";
 import "../styles/Card.css";
 
 export default function Card(props) {
-  const { id, link, title, subtitle, getCardId, fillPopup } = props;
+  const { id, link, title, subtitle, getCardId, onCardClick } = props;
 
   const handleClick = (e) => {
     getCardId(id);
-    fillPopup(id);
+    onCardClick(true);
   };
 
-  const truncate = (input) => input.length > 140 ? `${input.substring(0, 140)}...` : input;
-
+  const truncate = (input) =>
+    input.length > 140 ? `${input.substring(0, 140)}...` : input;
 
   return (
     <div className="Card" onClick={handleClick}>

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import "../styles/App.css";
 
 import api from "../api/api";
@@ -16,10 +16,10 @@ function App() {
   const [selectedCardId, handleCardClick] = useState(null);
   const [popupData, setPopupData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isCardClicked, setCardClicked] = useState(false);
   let pageSize = 9;
-  console.log(selectedCardId)
   
-  const fillPopup = () => {
+  useEffect(() => {
     api.getCardById(selectedCardId).then((res) => {
       setPopupData({
         link: res[0].image_url,
@@ -30,10 +30,10 @@ function App() {
         food: res[0].food_pairing,
       });
     });
-  };
+  }, [isCardClicked]);
 
   const closePopup = () => {
-    setPopupData(null);
+    setCardClicked(false);
   };
 
   const handleSubmit = (e) => {
@@ -74,7 +74,7 @@ function App() {
               {...card}
               key={card.id}
               getCardId={handleCardClick}
-              fillPopup={fillPopup}
+              onCardClick={setCardClicked}
             />
           ))}
         </section>
@@ -85,7 +85,7 @@ function App() {
           pageSize={pageSize}
           onPageChange={(page) => setCurrentPage(page)}
         />
-        <Popup popupData={popupData} onClose={closePopup} />
+        <Popup isCardClicked={isCardClicked} popupData={popupData} onClose={closePopup} />
       </div>
     </div>
   );

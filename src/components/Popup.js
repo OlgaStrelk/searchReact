@@ -3,9 +3,9 @@ import React from "react";
 import "../styles/Popup.css";
 
 function Popup(props) {
-  const { popupData, onClose } = props;
+  const { isCardClicked, popupData, onClose } = props;
   return (
-    <div className={`Popup ${popupData && "Popup-open"}`}>
+    <div className={`Popup ${isCardClicked && "Popup-open"}`}>
       <div className="Popup-container">
         <button
           type="button"
