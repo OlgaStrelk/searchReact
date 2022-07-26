@@ -65,13 +65,15 @@ function App() {
   //отправить запрос за карточками
   const handleSubmit = (e) => {
     e.preventDefault();
+    setCurrentPage(1)
+    setIsNotFound(false);
     setIsLoading(true);
+    setCardsData([]);
     api
       .getCards(inputValue)
       .then((res) => {
         if (res.length === 0) {
           setIsNotFound(true);
-          setCardsData([]);
         } else {
           setIsNotFound(false);
           const formattedData = res.map((cardData) => {
