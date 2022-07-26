@@ -14,3 +14,5 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 4) при нажатии на элемент должна открываться страница конкретного пива содержащая подробную информацию (изображение, name, tagline, description, abv, food_pairing)
 
 Для создания стилей можно использовать bootstrap или написать что то своё на scss что будет плюсом.
+
+[Демоверсия проекта тут](https://olgastrelk.github.io/searcher-react/)
