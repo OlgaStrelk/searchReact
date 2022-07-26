@@ -3,8 +3,13 @@ class Api {
     this._baseUrl = config.baseUrl;
   }
 
-  getCards() {
-    return fetch(`${this._baseUrl}beers`).then((res) =>
+  getCards(inputValue) {
+    if (inputValue === '') {
+      return fetch(`${this._baseUrl}beers?page=1&per_page=80`).then((res) =>
+      res.ok ? res.json() : Promise.reject(res.status)
+    );
+    }
+    return fetch(`${this._baseUrl}beers?beer_name=${inputValue}`).then((res) =>
       res.ok ? res.json() : Promise.reject(res.status)
     );
   }

@@ -24,9 +24,5 @@
 
 .Card-subtitle {
   margin-top: 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 5px;
   color: #767676;
 }

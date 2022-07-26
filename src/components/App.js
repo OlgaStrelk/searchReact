@@ -16,7 +16,8 @@ function App() {
   const [selectedCardId, handleCardClick] = useState(null);
   const [popupData, setPopupData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  let PageSize = 9;
+  let pageSize = 9;
+  console.log(selectedCardId)
   
   const fillPopup = () => {
     api.getCardById(selectedCardId).then((res) => {
@@ -37,7 +38,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    api.getCards().then((res) => {
+    api.getCards(inputValue).then((res) => {
       const formattedData = res.map((cardData) => {
         return {
           link: cardData.image_url,
@@ -51,10 +52,10 @@ function App() {
   };
 
   const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * PageSize;
-    const lastPageIndex = firstPageIndex + PageSize;
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
     return cardsData.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage]);
+  }, [currentPage, cardsData, pageSize]);
 
   const handleInput = (e) => {
     setInputValue(e.target.value);
@@ -81,7 +82,7 @@ function App() {
           className="App-pagination"
           currentPage={currentPage}
           totalCount={cardsData.length}
-          pageSize={PageSize}
+          pageSize={pageSize}
           onPageChange={(page) => setCurrentPage(page)}
         />
         <Popup popupData={popupData} onClose={closePopup} />
