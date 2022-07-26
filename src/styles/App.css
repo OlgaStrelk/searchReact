@@ -23,3 +23,8 @@
   margin-bottom: 48px;
 }
 
+.App-pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

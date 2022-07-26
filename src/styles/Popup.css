@@ -56,6 +56,7 @@
 
 .Popup-image {
   height: 50vh;
+  max-width: 100%;
   object-fit: contain;
   grid-column-start: 1;
   grid-column-end: 2;
@@ -65,4 +66,7 @@
   justify-self: center
 }
 
+.Popup-tagline {
+  font-weight: bold;
+}
 

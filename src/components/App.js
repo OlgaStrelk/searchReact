@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import "../styles/App.css";
 
 import api from "../api/api";
@@ -8,14 +8,16 @@ import Form from "./Form";
 import Button from "./Button";
 import Card from "./Card";
 import Popup from "./Popup";
+import Pagination from "./Pagination";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [cardsData, setCardsData] = useState([]);
   const [selectedCardId, handleCardClick] = useState(null);
   const [popupData, setPopupData] = useState(null);
-
-  useEffect(() => {
+  const [currentPage, setCurrentPage] = useState(1);
+  let PageSize = 9;
+  const fillPopup = () => {
     api.getCardById(selectedCardId).then((res) => {
       setPopupData({
         link: res[0].image_url,
@@ -26,7 +28,7 @@ function App() {
         food: res[0].food_pairing,
       });
     });
-  }, [selectedCardId]);
+  };
 
   const closePopup = () => {
     setPopupData(null);
@@ -46,21 +48,41 @@ function App() {
       setCardsData(formattedData);
     });
   };
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return cardsData.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage]);
+
   const handleInput = (e) => {
     setInputValue(e.target.value);
   };
+
   return (
     <div className="App">
       <div className="App-content">
         <Form className="App-search" handleSubmit={handleSubmit}>
           <Input handleChange={handleInput} value={inputValue} />
-          <Button text={"Search"} />
+          <Button text={"Искать"} />
         </Form>
         <section className="App-cards">
-          {cardsData.map((card) => (
-            <Card {...card} key={card.id} onCardClick={handleCardClick} />
+          {currentTableData.map((card) => (
+            <Card
+              {...card}
+              key={card.id}
+              onCardClick={handleCardClick}
+              fillPopup={fillPopup}
+            />
           ))}
         </section>
+        <Pagination
+          className="App-pagination"
+          currentPage={currentPage}
+          totalCount={cardsData.length}
+          pageSize={PageSize}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
         <Popup popupData={popupData} onClose={closePopup} />
       </div>
     </div>
