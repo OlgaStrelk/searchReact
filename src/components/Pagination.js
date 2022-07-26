@@ -1,27 +1,3 @@
-// import React from "react";
-
-// import "../styles/Pagination.css";
-
-// export default function Pagination({ cardsPerPage, totalCards, paginate }) {
-//   const pageNumbers = [];
-
-//   for (let i = 1; i <= Math.ceil(totalCards / cardsPerPage); i++) {
-//     pageNumbers.push(i);
-//   }
-//   return (
-//     <div>
-//       <ul className="Pagination">
-//         {pageNumbers.map((number) => (
-//           <li className="Pagination-item" key={number}>
-//             <a href="!#" className="Pagination-link" onClick={()=> paginate(number)}>
-//               {number}
-//             </a>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
 import React from "react";
 import classnames from "classnames";
 import { usePagination, DOTS } from "../hooks/usePagination";
@@ -29,6 +5,7 @@ import "../styles/Pagination.css";
 
 const Pagination = (props) => {
   const {
+    className,
     onPageChange,
     totalCount,
     siblingCount = 1,
@@ -57,7 +34,7 @@ const Pagination = (props) => {
 
   let lastPage = paginationRange[paginationRange.length - 1];
   return (
-    <ul className="Pagination-container">
+    <ul className={classnames("Pagination-container", {[className]: className})}>
       <li
         className={classnames("Pagination-item", {
           disabled: currentPage === 1,
@@ -66,9 +43,9 @@ const Pagination = (props) => {
       >
         <div className="Pagination-arrow Arrow-left" />
       </li>
-      {paginationRange.map((pageNumber) => {
+      {paginationRange.map((pageNumber, i) => {
         if (pageNumber === DOTS) {
-          return <li className="Pagination-dots">&#8230;</li>;
+          return <li className="Pagination-dots" key={i}>&#8230;</li>;
         }
 
         return (
@@ -77,6 +54,7 @@ const Pagination = (props) => {
               selected: pageNumber === currentPage,
             })}
             onClick={() => onPageChange(pageNumber)}
+            key={i}
           >
             {pageNumber}
           </li>

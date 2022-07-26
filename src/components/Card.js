@@ -3,10 +3,10 @@ import React from "react";
 import "../styles/Card.css";
 
 export default function Card(props) {
-  const { id, link, title, subtitle, onCardClick, fillPopup } = props;
+  const { id, link, title, subtitle, getCardId, fillPopup } = props;
 
   const handleClick = (e) => {
-    onCardClick(id);
+    getCardId(id);
     fillPopup();
   };
 

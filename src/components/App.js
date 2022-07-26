@@ -17,6 +17,7 @@ function App() {
   const [popupData, setPopupData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   let PageSize = 9;
+  
   const fillPopup = () => {
     api.getCardById(selectedCardId).then((res) => {
       setPopupData({
@@ -71,7 +72,7 @@ function App() {
             <Card
               {...card}
               key={card.id}
-              onCardClick={handleCardClick}
+              getCardId={handleCardClick}
               fillPopup={fillPopup}
             />
           ))}
