@@ -18,7 +18,7 @@
 
 [Демоверсия проекта](https://olgastrelk.github.io/searcher-react/)
 
-# BearSearcher
+# Bear searcher
 ## employee test project
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
