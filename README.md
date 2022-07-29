@@ -1,18 +1,39 @@
-# BearSearcher
+# Поисковик пива
+ одностраничное приложение с реализованным поиском через запрос к серверу.
+
+##### scroll down for english version
+
+Использован punkapi (https://punkapi.com/documentation/v2)
+
+## Реализованы:
+1) строка поиска по названию пива
+2) карточки пива содержащие краткую информацию (изображение, название, краткое содержание не более 140 символов в случае превышения добавлять троеточие)
+3) пагинация
+4) при нажатии на элемент открывается попап с подробной подробной информацией (изображение, name, tagline, description, abv, food_pairing)
+
+## Можно улучшить:
+1) переписать на NextJS
+2) вместо открытия попапа реализовать переход на страницу
+2) переписать стили на SCSS
+
+[Демоверсия проекта](https://olgastrelk.github.io/searcher-react/)
+
+# Bear searcher
+## employee test project
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## employee test project
+Punkapi used (https://punkapi.com/documentation/v2)
 
-Используя punkapi (https://punkapi.com/documentation/v2) написать приложение на React (будет плюсом если будет использован next js (https://nextjs.org))
+## Implemented:
+1) search string by beer name
+2) beer cards containing brief information (image, title, summary of no more than 140 characters, if exceeded, add three dots)
+3) pagination
+4) when you click on an element, a popup opens with detailed detailed information (image, name, tagline, description, abv, food_pairing)
 
-Первый экран должен содержать:
+## Can be improved:
+1) rewrite to NextJS
+2) instead of opening a popup, implement a transition to the page
+2) rewrite styles to SCSS
 
-1) строку поиска по названию пива
-2) карточки пива содержащие краткую информацию (изображение, название, краткое содержание не более 140 символов в случае превышения добавлять троеточие)
-3) пагинацию
-4) при нажатии на элемент должна открываться страница конкретного пива содержащая подробную информацию (изображение, name, tagline, description, abv, food_pairing)
-
-Для создания стилей можно использовать bootstrap или написать что то своё на scss что будет плюсом.
-
-[Демоверсия проекта тут](https://olgastrelk.github.io/searcher-react/)
+[Project demo](https://olgastrelk.github.io/searcher-react/)
