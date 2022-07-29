@@ -36,13 +36,13 @@ function MainPage() {
     setCurrentPage(1);
     setIsLoading(true);
     setCardsData([]);
+    setIsNotFound(false);
     api
       .getCards(inputValue)
       .then((res) => {
         if (res.length === 0) {
           setIsNotFound(true);
         } else {
-          setIsNotFound(false);
           const formattedData = res.map((cardData) => {
             return {
               link: cardData.image_url,
@@ -70,9 +70,6 @@ function MainPage() {
     renderButton();
   };
 
-  console.log(cardsData);
-  console.log(currentTableData);
-
   return (
     <>
       <section className="searcher">
@@ -91,9 +88,9 @@ function MainPage() {
           <Loading />
         ) : (
           <>
-            <ul>
+            <ul className="cards">
               {currentTableData.map((card) => (
-                <Link to={`/${card.id}`}>
+                <Link to={`/${card.id}`} className="link">
                   <Card {...card} />
                 </Link>
               ))}

@@ -1,21 +1,27 @@
-.Cards {
+.card {
   width: 276px;
   font-size: 14px;
   margin-top: 30px;
   cursor: pointer;
+  color: black;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
-.Cards:hover {
-  opacity: 0.7;
-}
-
-.Cards-image {
-  width: 100%;
+.image-container {
+  display: block;
   height: 180px;
+  width: 100%;
+}
+
+.image {
+  height: 100%;
   object-fit: contain;
 }
 
-.Cards-title {
+.title {
   text-align: center;
   font-weight: 700;
   margin-top: 20px;
@@ -23,7 +29,7 @@
   min-height: 38px;
 }
 
-.Cards-subtitle {
+.subtitle {
   margin-top: 5px;
   color: #767676;
 }
