@@ -1,11 +1,11 @@
 import React from "react";
 
-import "../styles/Loading.css";
+import "../styles/Loading.scss";
 
 function Loading() {
   return (
-    <div className="Loading-container">
-      <div className="Loading-item">
+    <div className="loading">
+      <div className="loading item">
       </div>
     </div>
   );

@@ -71,7 +71,7 @@ function MainPage() {
   };
 
   return (
-    <>
+    <div className="container">
       <section className="searcher">
         <Form handleSubmit={handleSubmit}>
           <Input handleChange={handleInput} value={inputValue} />
@@ -106,7 +106,7 @@ function MainPage() {
         )}
         {isNotFound && <NotFound />}
       </section>
-    </>
+    </div>
   );
 }
 

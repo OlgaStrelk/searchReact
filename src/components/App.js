@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import "../styles/App.scss";
 import { LoadingContext } from "../context/LoadingContext";
 
 import MainPage from "./MainPage";
@@ -11,21 +10,17 @@ function App() {
 
   return (
     <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
-      <div className="app">
-        <div className="container">
-          <Switch>
-            <Route path="/" exact>
-              <MainPage />
-            </Route>
-            <Route path="/:id">
-              <CardPage />
-            </Route>
-            <Route path="*">
-              <Redirect to="/" />
-            </Route>
-          </Switch>
-        </div>
-      </div>
+      <Switch>
+        <Route path="/" exact>
+          <MainPage />
+        </Route>
+        <Route path="/:id">
+          <CardPage />
+        </Route>
+        <Route path="*">
+          <Redirect to="/" />
+        </Route>
+      </Switch>
     </LoadingContext.Provider>
   );
 }

@@ -34,34 +34,38 @@ function CardPage() {
   }, []);
 
   return (
-    <>
+    <div className="card-page">
       <button
+        className="return-btn"
         onClick={() => {
           history.goBack();
         }}
       >
-        Вернуться назад
+        &#8592;Вернуться назад
       </button>
       {isLoading ? (
         <Loading />
       ) : cardData ? (
-        <div className="Card-container">
-          <img
-            className="Card-image"
-            src={cardData.link}
-            alt={cardData.title}
-          />
-
-          <h3 className="Card-title">{cardData.title}</h3>
-          <p className="Card-subtitle">{cardData.subtitle}</p>
-          <span className="Card-tagline">{cardData.tagline}</span>
-          <p className="Card-text">{cardData.abv}</p>
-          <p className="Card-text">{cardData.food}</p>
-        </div>
+        <section className="content">
+          <div className="image">
+            <img
+              className="image item"
+              src={cardData.link}
+              alt={cardData.title}
+            />
+          </div>
+          <div className="description">
+            <h3>{cardData.title}</h3>
+            <p>{cardData.subtitle}</p>
+            <span>{cardData.tagline}</span>
+            <p>{cardData.abv} vol.</p>
+            <p>{cardData.food}</p>
+          </div>
+        </section>
       ) : (
         <NotFound />
       )}
-    </>
+    </div>
   );
 }
 
