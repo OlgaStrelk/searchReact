@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
 import "../styles/CardPage.scss";
 import api from "../api/api";
 import NotFound from "./NotFound";
 import Loading from "./Loading";
+import { LoadingContext } from "../context/LoadingContext";
 
 function CardPage() {
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
+
   const [cardData, setCardData] = useState(null);
 
   const { id } = useParams();
   const history = useHistory();
 
-  //открыть попап, если карточка кликнута
+  //загрузить информацию
   useEffect(() => {
     setIsLoading(true);
     api

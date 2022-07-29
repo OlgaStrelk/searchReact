@@ -1,6 +1,7 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useContext } from "react";
 import { Link } from "react-router-dom";
 
+import { LoadingContext } from "../context/LoadingContext";
 import Input from "./Input";
 import Form from "./Form";
 import Button from "./Button";
@@ -12,13 +13,12 @@ import "../styles/MainPage.scss";
 import api from "../api/api";
 
 function MainPage() {
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
   const [inputValue, setInputValue] = useState("");
   const [cardsData, setCardsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isButtonActive, setIsButtonActive] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
 
   let pageSize = 9;
 
@@ -89,15 +89,14 @@ function MainPage() {
       <section className="results">
         {isLoading ? (
           <Loading />
-        ) : cardsData?.length ? (
+        ) : (
           <>
             <ul>
               {currentTableData.map((card) => (
                 <Link to={`/${card.id}`}>
-                <Card
-                  {...card}
-                /></Link>
-              ))}{" "}
+                  <Card {...card} />
+                </Link>
+              ))}
             </ul>
             <Pagination
               className="pagination"
@@ -107,9 +106,8 @@ function MainPage() {
               onPageChange={(page) => setCurrentPage(page)}
             />
           </>
-        ) : (
-          <NotFound />
         )}
+        {isNotFound && <NotFound />}
       </section>
     </>
   );
