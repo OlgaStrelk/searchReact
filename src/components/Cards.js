@@ -1,8 +1,8 @@
 import React from "react";
 
-import "../styles/Card.css";
+import "../styles/Cards.css";
 
-export default function Card(props) {
+export default function Cards(props) {
   const { id, link, title, subtitle, getCardId, onCardClick } = props;
 
   const handleClick = (e) => {
@@ -14,10 +14,10 @@ export default function Card(props) {
     input.length > 140 ? `${input.substring(0, 140)}...` : input;
 
   return (
-    <div className="Card" onClick={handleClick}>
-      <img className="Card-image" src={link} alt={title} />
-      <h3 className="Card-title">{title}</h3>
-      <p className="Card-subtitle">{truncate(subtitle)}</p>
+    <div className="Cards" onClick={handleClick}>
+      <img className="Cards-image" src={link} alt={title} />
+      <h3 className="Cards-title">{title}</h3>
+      <p className="Cards-subtitle">{truncate(subtitle)}</p>
     </div>
   );
 }

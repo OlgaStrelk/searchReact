@@ -1,5 +1,8 @@
 import React from "react";
+import "../styles/NotFound.scss";
 
 export default function NotFound() {
-  return <p>Увы, мы ничего не нашли. Попробуйте другое название.</p>;
+  return (
+    <p className="text">Увы, мы ничего не нашли. Попробуйте другое название.</p>
+  );
 }

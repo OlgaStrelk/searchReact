@@ -1,13 +1,14 @@
 import React, { useState, useMemo, useEffect } from "react";
-import "../styles/App.css";
+import { Link } from "react-router-dom";
+import "../styles/App.scss";
 
 import api from "../api/api";
 
 import Input from "./Input";
 import Form from "./Form";
 import Button from "./Button";
-import Card from "./Card";
-import Popup from "./Popup";
+import Cards from "./Cards";
+import CardPage from "./CardPage";
 import Pagination from "./Pagination";
 import Loading from "./Loading";
 import NotFound from "./NotFound";
@@ -16,10 +17,10 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [cardsData, setCardsData] = useState([]);
   const [selectedCardId, handleCardClick] = useState(null);
-  const [popupData, setPopupData] = useState(null);
+  const [cardData, setCardData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isCardClicked, setCardClicked] = useState(false);
-  const [openPopup, setOpenPopup] = useState(false);
+  const [openCard, setOpenCard] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isButtonActive, setIsButtonActive] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
@@ -41,7 +42,7 @@ function App() {
       api
         .getCardById(selectedCardId)
         .then((res) => {
-          setPopupData({
+          setCardData({
             link: res[0].image_url,
             title: res[0].name,
             subtitle: res[0].description,
@@ -49,23 +50,23 @@ function App() {
             abv: res[0].abv,
             food: res[0].food_pairing,
           });
-          setOpenPopup(true);
+          setOpenCard(true);
         })
         .finally(() => setIsLoading(false));
     }
   }, [isCardClicked]);
 
   //закрыть попап
-  const closePopup = () => {
-    setOpenPopup(false);
+  const closeCard = () => {
+    setOpenCard(false);
     setCardClicked(false);
-    setPopupData(null);
+    setCardData(null);
   };
 
   //отправить запрос за карточками
   const handleSubmit = (e) => {
     e.preventDefault();
-    setCurrentPage(1)
+    setCurrentPage(1);
     setIsNotFound(false);
     setIsLoading(true);
     setCardsData([]);
@@ -104,40 +105,47 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div className="App-content">
-        <Form className="App-search" handleSubmit={handleSubmit}>
-          <Input handleChange={handleInput} value={inputValue} />
-          <Button
-            text={"Искать"}
-            inputValue={inputValue}
-            isButtonActive={isButtonActive}
-          />
-        </Form>
-        {isLoading && <Loading>Loading...</Loading>}
-        <section className="App-cards">
-          {isNotFound && <NotFound />}
-          {currentTableData.map((card) => (
-            <Card
-              {...card}
-              key={card.id}
-              getCardId={handleCardClick}
-              onCardClick={setCardClicked}
+    <div className="app">
+      <div className="container">
+        <section className="searcher">
+          <Form handleSubmit={handleSubmit}>
+            <Input handleChange={handleInput} value={inputValue} />
+            <Button
+              text={"Искать"}
+              inputValue={inputValue}
+              isButtonActive={isButtonActive}
             />
-          ))}
+          </Form>
         </section>
-        <Pagination
-          className="App-pagination"
-          currentPage={currentPage}
-          totalCount={cardsData.length}
-          pageSize={pageSize}
-          onPageChange={(page) => setCurrentPage(page)}
-        />
-        <Popup
-          openPopup={openPopup}
-          popupData={popupData}
-          onClose={closePopup}
-        />
+
+        <section className="results">
+          {isLoading && <Loading>Loading...</Loading>}
+          <div className="cards">
+            {isNotFound && <NotFound />}
+            {currentTableData.map((card) => (
+              <Link to="">
+                <Cards
+                  {...card}
+                  key={card.id}
+                  getCardId={handleCardClick}
+                  onCardClick={setCardClicked}
+                />
+              </Link>
+            ))}
+            <Pagination
+              className="pagination"
+              currentPage={currentPage}
+              totalCount={cardsData.length}
+              pageSize={pageSize}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+            {/* <CardPage
+          openCard={openCard}
+          cardData={cardData}
+          onClose={closeCard}
+        /> */}
+          </div>
+        </section>
       </div>
     </div>
   );

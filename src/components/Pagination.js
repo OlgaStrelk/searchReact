@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import { usePagination, DOTS } from "../hooks/usePagination";
-import "../styles/Pagination.css";
+import "../styles/Pagination.scss";
 
 const Pagination = (props) => {
   const {
@@ -34,23 +34,23 @@ const Pagination = (props) => {
 
   let lastPage = paginationRange[paginationRange.length - 1];
   return (
-    <ul className={classnames("Pagination-container", {[className]: className})}>
+    <ul className={classnames("pagination-container", {[className]: className})}>
       <li
-        className={classnames("Pagination-item", {
+        className={classnames("pagination-item", {
           disabled: currentPage === 1,
         })}
         onClick={onPrevious}
       >
-        <div className="Pagination-arrow Arrow-left" />
+        <div className="arrow eft" />
       </li>
       {paginationRange.map((pageNumber, i) => {
         if (pageNumber === DOTS) {
-          return <li className="Pagination-dots" key={i}>&#8230;</li>;
+          return <li className="dots" key={i}>&#8230;</li>;
         }
 
         return (
           <li
-            className={classnames("Pagination-item", {
+            className={classnames("pagination-item", {
               selected: pageNumber === currentPage,
             })}
             onClick={() => onPageChange(pageNumber)}
@@ -62,12 +62,12 @@ const Pagination = (props) => {
       })}
       {}
       <li
-        className={classnames("Pagination-item", {
+        className={classnames("pagination-item", {
           disabled: currentPage === lastPage,
         })}
         onClick={onNext}
       >
-        <div className="Pagination-arrow Arrow-right" />
+        <div className="arrow right" />
       </li>
     </ul>
   );

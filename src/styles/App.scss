@@ -1,0 +1,27 @@
+.app {
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #000;
+}
+
+.container {
+  max-width: 860px;
+  margin: 90px auto;
+
+  .searcher {
+    margin-bottom: 24px;
+  }
+
+  .styles {
+    margin: 60px 0 48px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}

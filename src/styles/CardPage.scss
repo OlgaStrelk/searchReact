@@ -1,4 +1,4 @@
-.Popup {
+.CardPage {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -14,12 +14,12 @@
   transition: visibility 0.3s, opacity 0.3s linear;
 }
 
-.Popup-open {
+.CardPage-open {
   visibility: visible;
   opacity: 1;
 }
 
-.Popup-container {
+.CardPage-container {
   background-color: white;
   color: black;
   width: 430px;
@@ -35,7 +35,7 @@
   grid-gap: 6px 30px;
 }
 
-.Popup-close {
+.CardPage-close {
   padding: 0;
   position: absolute;
   top: -40px;
@@ -50,11 +50,11 @@
   cursor: pointer;
 }
 
-.Popup-close:hover {
+.CardPage-close:hover {
   opacity: 0.6;
 }
 
-.Popup-image {
+.CardPage-image {
   height: 50vh;
   max-width: 100%;
   object-fit: contain;
@@ -66,7 +66,7 @@
   justify-self: center
 }
 
-.Popup-tagline {
+.CardPage-tagline {
   font-weight: bold;
 }
 
