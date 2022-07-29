@@ -4,22 +4,21 @@ import { Link } from "react-router-dom";
 import Input from "./Input";
 import Form from "./Form";
 import Button from "./Button";
-import Cards from "./Cards";
+import Card from "./Card";
 import Pagination from "./Pagination";
 import Loading from "./Loading";
 import NotFound from "./NotFound";
 import "../styles/MainPage.scss";
 import api from "../api/api";
 
-function MainPage({ setCardData }) {
+function MainPage() {
   const [inputValue, setInputValue] = useState("");
   const [cardsData, setCardsData] = useState([]);
-  const [selectedCardId, handleCardClick] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isCardClicked, setCardClicked] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [isButtonActive, setIsButtonActive] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   let pageSize = 9;
 
@@ -31,31 +30,10 @@ function MainPage({ setCardData }) {
     setIsButtonActive(true);
   };
 
-  //открыть попап, если карточка кликнута
-  useEffect(() => {
-    if (isCardClicked === true) {
-      setIsLoading(true);
-      api
-        .getCardById(selectedCardId)
-        .then((res) => {
-          setCardData({
-            link: res[0].image_url,
-            title: res[0].name,
-            subtitle: res[0].description,
-            tagline: res[0].tagline,
-            abv: res[0].abv,
-            food: res[0].food_pairing,
-          });
-        })
-        .finally(() => setIsLoading(false));
-    }
-  }, [isCardClicked]);
-
   //отправить запрос за карточками
   const handleSubmit = (e) => {
     e.preventDefault();
     setCurrentPage(1);
-    setIsNotFound(false);
     setIsLoading(true);
     setCardsData([]);
     api
@@ -92,6 +70,9 @@ function MainPage({ setCardData }) {
     renderButton();
   };
 
+  console.log(cardsData);
+  console.log(currentTableData);
+
   return (
     <>
       <section className="searcher">
@@ -106,27 +87,29 @@ function MainPage({ setCardData }) {
       </section>
 
       <section className="results">
-        {isLoading && <Loading>Loading...</Loading>}
-        <div className="cards">
-          {isNotFound && <NotFound />}
-          {currentTableData.map((card) => (
-            <Link to="">
-              <Cards
-                {...card}
-                key={card.id}
-                getCardId={handleCardClick}
-                onCardClick={setCardClicked}
-              />
-            </Link>
-          ))}
-          <Pagination
-            className="pagination"
-            currentPage={currentPage}
-            totalCount={cardsData.length}
-            pageSize={pageSize}
-            onPageChange={(page) => setCurrentPage(page)}
-          />{" "}
-        </div>
+        {isLoading ? (
+          <Loading />
+        ) : cardsData?.length ? (
+          <>
+            <ul>
+              {currentTableData.map((card) => (
+                <Link to={`/${card.id}`}>
+                <Card
+                  {...card}
+                /></Link>
+              ))}{" "}
+            </ul>
+            <Pagination
+              className="pagination"
+              currentPage={currentPage}
+              totalCount={cardsData.length}
+              pageSize={pageSize}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+          </>
+        ) : (
+          <NotFound />
+        )}
       </section>
     </>
   );
