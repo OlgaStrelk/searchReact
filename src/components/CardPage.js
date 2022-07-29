@@ -3,17 +3,11 @@ import React from "react";
 import "../styles/CardPage.scss";
 
 function CardPage(props) {
-  const { openCard, cardData, onClose } = props;
+  const { cardData } = props;
   return (
-    <div className={`Card ${openCard && "Card-open"}`}>
+    <>
+      <a href="#">Вернуться назад</a>
       <div className="Card-container">
-        <button
-          type="button"
-          className="Card-close"
-          aria-label="Закрыть"
-          onClick={onClose}
-        ></button>
-
         <img
           className="Card-image"
           src={cardData?.link}
@@ -26,7 +20,7 @@ function CardPage(props) {
         <p className="Card-text">{cardData?.abv}</p>
         <p className="Card-text">{cardData?.food}</p>
       </div>
-    </div>
+    </>
   );
 }
 
