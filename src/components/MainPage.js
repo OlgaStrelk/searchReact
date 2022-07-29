@@ -1,7 +1,9 @@
 import React, { useState, useMemo, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { LoadingContext } from "../context/LoadingContext";
+import { LoadingContext } from "../contexts/LoadingContext";
+import { CardsContext } from "../contexts/CardsContext";
+
 import Input from "./Input";
 import Form from "./Form";
 import Button from "./Button";
@@ -13,9 +15,9 @@ import "../styles/MainPage.scss";
 import api from "../api/api";
 
 function MainPage() {
+  const { cardsData, setCardsData } = useContext(CardsContext);
   const { isLoading, setIsLoading } = useContext(LoadingContext);
   const [inputValue, setInputValue] = useState("");
-  const [cardsData, setCardsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isButtonActive, setIsButtonActive] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);

@@ -5,7 +5,7 @@ import "../styles/CardPage.scss";
 import api from "../api/api";
 import NotFound from "./NotFound";
 import Loading from "./Loading";
-import { LoadingContext } from "../context/LoadingContext";
+import { LoadingContext } from "../contexts/LoadingContext";
 
 function CardPage() {
   const { isLoading, setIsLoading } = useContext(LoadingContext);
