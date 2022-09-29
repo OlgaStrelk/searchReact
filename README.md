@@ -24,12 +24,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Punkapi used (https://punkapi.com/documentation/v2)
 
 ## Implemented:
-1) search string by beer name
+1) searcher by beer name
 2) beer cards containing brief information (image, title, summary of no more than 140 characters, if exceeded, add three dots)
 3) pagination
 4) when you click on an element, redirects to detailed information (image, name, tagline, description, abv, food_pairing)
 
 ## Can be improved:
-1) rewrite to NextJS
+1) rewrite on NextJS
 
 [Project demo](https://olgastrelk.github.io/searcher-react/)
